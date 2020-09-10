@@ -12,5 +12,5 @@
  *
  *= require_tree .
  *= require_self
- *= require will_paginate_infinite
  */
+@import "bootstrap";

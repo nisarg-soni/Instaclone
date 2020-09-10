@@ -1,0 +1,7 @@
+<div>
+<%= image_tag post.image.url(:square), class: "card-img-top" %>
+<p  class= "card-title"><%= post.caption %></p>
+<%= link_to 'Edit', edit_post_path(post) %>
+  <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %>
+
+</div>

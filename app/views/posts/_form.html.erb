@@ -15,6 +15,11 @@
     <%= form.label :caption %>
     <%= form.text_field :caption, id: :post_caption %>
   </div>
+  
+  <div class="col">		
+	 <%= form.label :image, html: { for: 'image' } %>
+ 	 <%= form.file_field :image , class: 'form-control-file', id: 'image'%>
+  	</div>
 
   <div class="actions">
     <%= form.submit %>

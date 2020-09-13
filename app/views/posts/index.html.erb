@@ -1,4 +1,4 @@
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+
 
 <p id="notice"><%= notice %></p>
 
@@ -21,22 +21,28 @@
 
 	
 
-window.addEventListener("scroll", (event) => {
-	if($(window).scrollTop() + $(window).height()  >= $(document).height()) {
+window.addEventListener("scroll",async (event) => {
+	if((window.pageYOffset|| 0) + (window.innerHeight || 0)  >=Math.max( document.body.scrollHeight, document.body.offsetHeight, 
+		document.documentElement.clientHeight, document.documentElement.scrollHeight, document.documentElement.offsetHeight )) {
 		let next_page= document.querySelector("a[rel='next']")
 		if(next_page == null){
 			return
 		}
 		const url= next_page.href
-		$.ajax({
-			type: 'GET',
-			url: url,
-			dataType: 'json'
-,			success: (data)=> {
-				
-				document.getElementById("post-list").innerHTML += data.entries;
-				document.getElementById("pagination-nav").innerHTML= data.newNav;
+
+		
+		  
+		await fetch(url,{
+			method : 'GET',
+			headers : {
+				'Accept' : 'application/json'
 			}
+		})
+		.then(response => response.json())
+		.then(data => {
+			
+			document.getElementById("post-list").innerHTML += data.entries;
+			document.getElementById("pagination-nav").innerHTML= data.newNav;
 		});
 		
 	}

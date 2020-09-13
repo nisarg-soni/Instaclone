@@ -1,3 +1,4 @@
+
 class PostsController < ApplicationController
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
@@ -5,7 +6,10 @@ class PostsController < ApplicationController
   def index
     @new_post = Post.new
     @posts = Post.paginate(page: params[:page], per_page: 4).order(created_at: :desc)
-    
+    respond_to do |format|
+      format.html 
+      format.json { render json: {entries: render_to_string(partial: "post", formats: [:html]), newNav: view_context.will_paginate(@posts)}}
+    end 
   end
 
 
